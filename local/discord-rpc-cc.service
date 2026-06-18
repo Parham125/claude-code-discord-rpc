@@ -1,0 +1,16 @@
+[Unit]
+Description=Discord Rich Presence for Claude Code
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/discord-rpc-cc/env
+# Flatpak/Snap Discord keep the RPC socket in a sandboxed dir; expose it where pypresence looks.
+ExecStartPre=-/bin/ln -sf %t/app/com.discordapp.Discord/discord-ipc-0 %t/discord-ipc-0
+ExecStart=%h/.local/share/discord-rpc-cc/venv/bin/python %h/.local/share/discord-rpc-cc/client.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

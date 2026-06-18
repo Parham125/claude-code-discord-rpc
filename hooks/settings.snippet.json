@@ -1,0 +1,33 @@
+{
+  "_comment": "Merge these into ~/.claude/settings.json. Add the two env vars to the existing 'env' block, and APPEND each hook entry to the matching event array (do not replace any hooks you already have). Set the command path to where you cloned this repo, and CLAUDE_RPC_TOKEN to your bridge token. CLAUDE_RPC_URL uses localhost because the bridge runs in the same container as Claude Code; point it at the bridge's address otherwise.",
+  "env": {
+    "CLAUDE_RPC_URL": "http://127.0.0.1:8787/api/v1/events",
+    "CLAUDE_RPC_TOKEN": "YOUR_BRIDGE_TOKEN"
+  },
+  "hooks": {
+    "SessionStart": [
+      {"hooks": [{"type": "command", "command": "python3 /path/to/claude-code-discord-rpc/hooks/hook_send.py"}]}
+    ],
+    "UserPromptSubmit": [
+      {"hooks": [{"type": "command", "command": "python3 /path/to/claude-code-discord-rpc/hooks/hook_send.py"}]}
+    ],
+    "PreToolUse": [
+      {"matcher": "*", "hooks": [{"type": "command", "command": "python3 /path/to/claude-code-discord-rpc/hooks/hook_send.py"}]}
+    ],
+    "PostToolUse": [
+      {"matcher": "*", "hooks": [{"type": "command", "command": "python3 /path/to/claude-code-discord-rpc/hooks/hook_send.py"}]}
+    ],
+    "Stop": [
+      {"hooks": [{"type": "command", "command": "python3 /path/to/claude-code-discord-rpc/hooks/hook_send.py"}]}
+    ],
+    "SubagentStop": [
+      {"hooks": [{"type": "command", "command": "python3 /path/to/claude-code-discord-rpc/hooks/hook_send.py"}]}
+    ],
+    "Notification": [
+      {"matcher": "*", "hooks": [{"type": "command", "command": "python3 /path/to/claude-code-discord-rpc/hooks/hook_send.py"}]}
+    ],
+    "SessionEnd": [
+      {"hooks": [{"type": "command", "command": "python3 /path/to/claude-code-discord-rpc/hooks/hook_send.py"}]}
+    ]
+  }
+}

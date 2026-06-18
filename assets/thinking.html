@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0}
+  .tile{width:512px;height:512px;background:#da7756;border-radius:96px;position:relative;overflow:hidden}
+  .ring{position:absolute;inset:0}
+  .dot{position:absolute;top:50%;left:50%;width:30px;height:30px;margin:-15px;border-radius:50%;background:#f5efe6}
+</style>
+</head>
+<body>
+  <div class="tile"><div class="ring" id="ring"></div></div>
+  <script>
+    const N=12, R=150, TRAIL=0.85, ring=document.getElementById("ring")
+    for(let i=0;i<N;i++){
+      const d=document.createElement("div")
+      d.className="dot"
+      d.style.transform=`rotate(${i*360/N}deg) translateY(${-R}px)`
+      d.style.opacity=(1-TRAIL*i/(N-1)).toFixed(3)
+      ring.appendChild(d)
+    }
+  </script>
+</body>
+</html>
